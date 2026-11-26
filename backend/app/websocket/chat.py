@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timezone
+from typing import Optional
 from uuid import UUID
 
 import jwt
@@ -22,7 +23,7 @@ def wire_datetime(value: datetime) -> str:
     return value.isoformat()
 
 
-def error_message(request_id: str | None, code: str, message: str) -> dict:
+def error_message(request_id: Optional[str], code: str, message: str) -> dict:
     return {
         "type": "error",
         "requestId": request_id,

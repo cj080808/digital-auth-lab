@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+**/.venv/
+
+# Local runtime data
+*.db
+*.sqlite3
+
+# Local secrets and private keys
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.pfx
+
+# Temporary CA bundles created by Python packages
+*cacert.pem
+
+# Operating system files
+.DS_Store
+Thumbs.db

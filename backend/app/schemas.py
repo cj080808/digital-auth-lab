@@ -1,6 +1,6 @@
 import re
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -21,7 +21,7 @@ class ApiModel(BaseModel):
 class RegisterRequest(ApiModel):
     username: str = Field(min_length=3, max_length=20)
     password: str = Field(min_length=8, max_length=128)
-    display_name: str | None = Field(default=None, max_length=80)
+    display_name: Optional[str] = Field(default=None, max_length=80)
 
     @field_validator("username")
     @classmethod

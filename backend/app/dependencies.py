@@ -1,3 +1,5 @@
+from typing import Optional
+
 import jwt
 from fastapi import Cookie, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -8,7 +10,7 @@ from app.security import COOKIE_NAME, decode_access_token
 
 
 def get_current_user(
-    access_token: str | None = Cookie(default=None, alias=COOKIE_NAME),
+    access_token: Optional[str] = Cookie(default=None, alias=COOKIE_NAME),
     db: Session = Depends(get_db),
 ) -> User:
     if not access_token:

@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from typing import Optional
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -18,7 +19,7 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255))
     display_name: Mapped[str] = mapped_column(String(80))
     role: Mapped[str] = mapped_column(String(20), default="user")
-    certificate_serial_number: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    certificate_serial_number: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
 
     sent_messages: Mapped[list["Message"]] = relationship(
@@ -34,7 +35,7 @@ class Message(Base):
     sender_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     receiver_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     content: Mapped[str] = mapped_column(Text)
-    signature: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    signature: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, index=True)
 
     sender: Mapped[User] = relationship(foreign_keys=[sender_id], back_populates="sent_messages")

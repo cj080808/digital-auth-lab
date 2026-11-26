@@ -4,13 +4,13 @@ FastAPI implementation of the REST and WebSocket API described in the repository
 
 ## Run locally
 
-Use Python 3.11 or newer:
+Use Python 3.9 or newer:
 
 ```powershell
 cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --only-binary greenlet
 $env:COOKIE_SECURE = "false"
 $env:JWT_SECRET_KEY = "replace-with-a-long-random-secret"
 uvicorn app.main:app --reload
@@ -24,6 +24,8 @@ every deployed environment; without it, a process-random key is used and tokens
 will not remain valid after restart.
 
 ## Tests
+
+pip install pytest -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```powershell
 python -m pytest
